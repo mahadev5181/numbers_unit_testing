@@ -1,13 +1,18 @@
 <?php
 namespace App;
 class Number{
-	public function checknumber($number){
+	public function checknumber($number,$count){
 		$i = 1;
+		$prime_num_array = [];
+		$counter = 1;
 		while($i <= $number){
-			$a = $this->IsPrime($i);
-			if ($a!=0)
-				$this->multiplication($i);
-			
+			if($counter <= $count){
+				$a = $this->IsPrime($i);
+				if ($a!=0){
+					$this->prime_num_array[] = $i;
+					$counter++;
+				}
+			}
 			$i++;
 		}
 	}
@@ -27,22 +32,19 @@ class Number{
 	}
 	/*
 		Function : multiplication
-		Parameter : $num - integer number
-		Return : return multiplication of a $num
 	*/
-	function multiplication($num){
-		$j=1;
-		while ($j<=10)
-		{
-			$total=$num*$j;
-			echo $num." * ".$j." = ".$total."<br>";
-			$j++;
+	function multiplication(){
+		foreach($this->prime_num_array as $val){
+			foreach($this->prime_num_array as $jval){
+				echo $val * $jval."  ";
+			}
+			echo "<br/><br/>";
 		}
-		echo "<br/><br/>";
 	}
 }
 
 $classob = new Number();
-$classob->checknumber(5);
+$classob->checknumber(100,10);
+$classob->multiplication();
 
 ?>
